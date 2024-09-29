@@ -1,0 +1,4 @@
+.micropythonbuilds/
+.additions/
+.venv/
+.vscode/
