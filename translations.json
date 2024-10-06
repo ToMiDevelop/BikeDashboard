@@ -1,0 +1,16 @@
+{
+    "Motocykl" : {"type" : "full word", "English" : "motorbike"},
+    "Piotrka" : {"type" : "full word", "English" : "Piotr's"},
+    "wersja" : {"type" : "full word", "English" : "version"},
+    "uruchamianie" : {"type" : "full word", "English" : "booting up"},
+    "systemu" : {"type" : "full word", "English" : "system"},
+    "Sewn." : {"type" : "shortcut", "English" : "outside"},
+    "Siln." : {"type" : "shortcut", "English" : "engine"},
+    "Kufer" : {"type" : "full word", "English" : "trunk"},
+    "L" : {"type" : "shortcut", "English" : "left"},
+    "R" : {"type" : "shortcut", "English" : "right"},
+    "ZAMK." : {"type" : "shortcut", "English" : "closed"},
+    "OTWARTY" : {"type" : "full word", "English" : "closed"},
+    "st." : {"type" : "shortcut", "English" : "degree"},
+    "C" : {"type" : "shortcut", "English" : "Celsius"}
+}
