@@ -61,4 +61,4 @@ In **pics** you can find pictures of the custom made pcb and the working prototy
 
 ## 7. Legal notice
 
-I'm the only author of all the work covered in this repository. All the files made publicly available in ths reposotiry are licensed under the CC NY 4.0 license. The full licence text is available in **LICENSE** file.
+I'm the only author of all the work covered in this repository. All the files made publicly available in ths reposotiry are licensed under the BikeDasboard project license. The full licence text is available in **LICENSE** file.
