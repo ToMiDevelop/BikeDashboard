@@ -67,8 +67,12 @@ class Display:
         """
         self.display.clear()
         self.display.move_to(1,0)
-        self.display.putstr('Temp.:') # wyswuetlanie temperatury na 8,0 zaokrąglenie do 2 cyf # wyswietlanie koncówki 'st. C' na pozycji 14,0
+        self.display.putstr('Zewn.:') # wyswuetlanie temperatury na 8,0 zaokrąglenie do 2 cyf # wyswietlanie koncówki 'st. C' na pozycji 14,0
         self.display.move_to(14,0)
+        self.display.putstr('st. C')
+        self.display.move_to(1,1)
+        self.display.putstr('Siln.: --.--') # wyswuetlanie temperatury na 8,0 zaokrąglenie do 2 cyf # wyswietlanie koncówki 'st. C' na pozycji 14,0
+        self.display.move_to(14,1)
         self.display.putstr('st. C')
         # -Kufer L----Kufer P-
         # -OTWARTY----OTWARTY-

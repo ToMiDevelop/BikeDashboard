@@ -10,7 +10,7 @@ sys.path.append('/functions')
 from WIFI_CONFIG import SSID, PASSWORD
 import network
 
-wlan = network.WLAN(network.WLAN.IF_STA)
+wlan = network.WLAN(network.WLAN.IF_STA) # type: ignore
 wlan.active(True)
 if not wlan.isconnected():
     print('Connecting to WiFi...')
