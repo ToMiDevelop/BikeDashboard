@@ -4,13 +4,13 @@
 |-|-|
 ![Device prototype](/pics/prototype.jpg)|![Device prototype](/pics/boot_screen.jpg)|
 
-|Main menu|Left trunk closed, rigth trunk open|
+|Main menu|Left trunk closed, right trunk open|
 |-|-|
 ![Device prototype](/pics/main_screen.jpg)|![Device prototype](/pics/l_closed_r_open.jpg)|
 
 ## 1. Brief repo description
 
-In this repository you'll find the source code, custom PCB project, connection schmatics of a simple digital dashboard tailored for the bike of one of my friends.
+In this repository you'll find the source code, custom PCB project, connection schematics of a simple digital dashboard tailored for the bike of one of my friends.
 
 ## 2. Functionality and key principles
 
@@ -18,7 +18,7 @@ In this repository you'll find the source code, custom PCB project, connection s
 - The device shows also the state of 2 trunks - either if they are closed or open.
 - The physical design has to enable the temperature sensors to be attached even more than 1 meter away from the microcontroller
 - The lcd screen should be attached approx. 1.5 meters away from the microcontroller.
-- Main electornics should be mounted in a custom 3d printed case bellow the seat.
+- Main electronics should be mounted in a custom 3d printed case bellow the seat.
 - There is a need for a step-down voltage regulator to connect DIY equipment to the battery.
 
 ## 3. Used components
@@ -30,41 +30,76 @@ In this repository you'll find the source code, custom PCB project, connection s
 - [4 x 20 character display](https://botland.com.pl/wyswietlacze-alfanumeryczne-i-graficzne/19734-wyswietlacz-lcd-4x20-znakow-niebieski-justpi-5903351243100.html?cd=518903701&ad=1317217320011988&kd=&msclkid=fb46d02c473e1ffb539ab72e9be8244d&utm_source=bing&utm_medium=cpc&utm_campaign=PLA%20-%20elektronika%20-%2006.2023&utm_term=2334125747398059&utm_content=Ad%20group%20%231)
 - [I2C converter for character display](https://botland.com.pl/konwertery-pozostale/2352-konwerter-i2c-dla-wyswietlacza-lcd-hd44780-5903351248693.html)
 - [bi-directional 4 channel logic level converter](https://botland.com.pl/konwertery-napiec/2259-konwerter-poziomow-logicznych-dwukierunkowy-4-kanalowy-sparkfun-bob-12009-5903351248716.html)
-- [4.7 kOhm resitors](https://botland.com.pl/rezystory-przewlekane/20152-rezystor-justpi-tht-cf-weglowy-14w-47k-30szt-5904422329303.html)
+- [4.7 kOhm resistors](https://botland.com.pl/rezystory-przewlekane/20152-rezystor-justpi-tht-cf-weglowy-14w-47k-30szt-5904422329303.html)
 - some wires
 - some pcb connectors
 - PETG 3d printer filament
 
 ## 4. Brief source code description
 
-The source code of the sripts running on the board are kept in the main path of the repo and in two folders: **lib** and **functions**. Main scripts runned on the board are: **boot.py** and **main.py**. All the folder and files, which need to be transfered to the microcontroller board are visible on the tree bellow.
+The source code of the scripts running on the board are kept in the main path of the repo and in two folders: **lib** and **functions**. Main scripts executed on the board are: **boot.py** and **main.py**. All the folder and files, which need to be transferred to the microcontroller board are visible on the tree bellow.
 
 ```
 BikeDashboard
- |
- ├──────────── functions
- |              ├── display.py
- |              ├── temperature.py
- |              └── trunk.py
- |
- ├──────────── lib
- |              ├── i2c_lcd.py
- |              ├── lcd_api.py
- |              └── WIFI_CONFIG.py
- |
- ├── boot.py
- └── main.py
+│
+├──── functions
+│     ├── display.py
+│     ├── temperature.py
+│     └── trunk.py
+│
+├──── lib
+│     ├── i2c_lcd.py
+│     ├── lcd_api.py
+│     └── WIFI_CONFIG.py
+│
+├── boot.py
+└── main.py
 ```
 
-In the **boot.py** there is some initial configuarions and start on boot code. In the **main.py** there is code with the main logic of the application. In **lib** there are libraries used to talk with the display and a wifi configuration file, as the OTA updates are one of the project goals. In **functions** there are modules with classes used to invoke all the individualy tailored operations made on display, interactions with the temperature sensor and the limit switches.
+In the **boot.py** there is some initial configurations and start on boot code. In the **main.py** there is code with the main logic of the application. In **lib** there are libraries used to talk with the display and a wifi configuration file, as the OTA updates are one of the project goals. In **functions** there are modules with classes used to invoke all the individually tailored operations made on display, interactions with the temperature sensor and the limit switches.
+
+## 6. Custom PCB Board
+
+In this project I'm using a custom designed PCB board. All the design files can be found in the **pcb** folder.
+
+```
+pcb
+│
+├──── gerber                            
+│     ├── Kokpit Final-B_Cu.gbr        
+│     ├── Kokpit Final-B_Mask.gbr       
+│     ├── Kokpit Final-B_Paste.gbr  
+│     ├── Kokpit Final-B_Silkscreen.gbr
+│     ├── Kokpit Final-Edge_Cuts.gbr
+│     ├── Kokpit Final-F_Cu.gbr        
+│     ├── Kokpit Final-F_Mask.gbr       
+│     ├── Kokpit Final-F_Paste.gbr  
+│     ├── Kokpit Final-F_Silkscreen.gbr
+│     ├── Kokpit Final-job.gbrjob
+│     ├── Kokpit Final-NPTH.drl
+│     └── Kokpit Final-PTH.drl
+│
+├──── renders                           
+│     ├── Back.png
+│     └── Front.png
+│
+└── BikeDashboard_KiCad.zip
+
+```
+In **gerber** folder there are all the generated gerber files. The **BikeDashboard_KiCad.zip** is a export of the whole KiCad project.
+
+|PCB - front render|PCB - back render|
+|-|-|
+|![Device prototype](/pcb/renders/Front.png)|![Device prototype](/pcb/renders/Back.png)|
 
 ## 5. Language notice
+
 All of the interface is designed in Polish, you can freely customize it with the translation from **translations.json** file.
 
-## 6. Other useful files
+## 7. Minor side tools
 
-In **pics** you can find pictures of the custom made pcb and the working prototype. In **pcb** there are Gerber files of the the custom pcb board, renders of the board and z **zip** archive with the KiCad project. In the **.sidetools** forlder you'll find some small scripts I used to scan the one wire and i2c bus and to test the display.
+In the **.sidetools** folder you'll find some small scripts I used to scan the one wire and i2c bus and to test the display.
 
-## 7. Legal notice
+## 8. Legal notice
 
-I'm the only author of all the work covered in this repository. All the files made publicly available in ths reposotiry are licensed under the BikeDasboard project license. The full licence text is available in **LICENSE** file.
+I'm the only author of all the work covered in this repository. All the files made publicly available in the repository are licensed under the BikeDasboard project license. The full licence text is available in **LICENSE** file.
