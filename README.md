@@ -1,6 +1,12 @@
 # Bike Dashboard
 
-![Device prototype](/pics/prototype.jpg)
+|Prototype|Boot screen|
+|-|-|
+![Device prototype](/pics/prototype.jpg)|![Device prototype](/pics/boot_screen.jpg)|
+
+|Main menu|Left trunk closed, rigth trunk open|
+|-|-|
+![Device prototype](/pics/main_screen.jpg)|![Device prototype](/pics/l_closed_r_open.jpg)|
 
 ## 1. Brief repo description
 
@@ -17,14 +23,14 @@ In this repository you'll find the source code, custom PCB project, connection s
 
 ## 3. Used components
 
-- ESP32-C3 Super-Mini board
-- LM2596 step-down voltage regulator
-- limit switches
-- DS18B20 temperature sensors
-- 4 x 20 character display
-- I2C converter for character display
-- bi-directional 4 channel logic level converter
-- 4.7 kOhm resitors
+- [ESP32-C3 Super-Mini board](https://pl.aliexpress.com/item/1005006096717048.html?src=bing&aff_short_key=UneMJZVf&aff_platform=true&isdl=y&albch=shopping&acnt=135095331&isdl=y&albcp=554979198&albag=1310619002143550&slnk=&trgt=pla-4585513252290472&plac=&crea=81913742884006&netw=o&device=c&mtctp=e&utm_source=Bing&utm_medium=shopping&utm_campaign=PA_Bing_PLA_PL_PC_SFFC_0-7_20240613&utm_content=0-7&utm_term=esp32%20c3%20super%20mini%20amazon&msclkid=571fcd1d5eb315ebd46eaa1f84995cf0&gatewayAdapt=glo2pol)
+- [LM2596 step-down voltage regulator](https://botland.com.pl/przetwornice-step-down/4871-przetwornica-step-down-lm2596-32v-35v-3a-z-wyswietlaczem-5904422359560.html)
+- [limit switches](https://botland.com.pl/czujniki-krancowe/919-wylacznik-czujnik-krancowy-mini-z-rolka-wk625-5szt-5904422372958.html)
+- [DS18B20 temperature sensors](https://botland.com.pl/sondy-wodoodporne/19516-sonda-wodoodporna-z-czujnikiem-temperatury-ds18b20-sent0002-2m-5904422307073.html)
+- [4 x 20 character display](https://botland.com.pl/wyswietlacze-alfanumeryczne-i-graficzne/19734-wyswietlacz-lcd-4x20-znakow-niebieski-justpi-5903351243100.html?cd=518903701&ad=1317217320011988&kd=&msclkid=fb46d02c473e1ffb539ab72e9be8244d&utm_source=bing&utm_medium=cpc&utm_campaign=PLA%20-%20elektronika%20-%2006.2023&utm_term=2334125747398059&utm_content=Ad%20group%20%231)
+- [I2C converter for character display](https://botland.com.pl/konwertery-pozostale/2352-konwerter-i2c-dla-wyswietlacza-lcd-hd44780-5903351248693.html)
+- [bi-directional 4 channel logic level converter](https://botland.com.pl/konwertery-napiec/2259-konwerter-poziomow-logicznych-dwukierunkowy-4-kanalowy-sparkfun-bob-12009-5903351248716.html)
+- [4.7 kOhm resitors](https://botland.com.pl/rezystory-przewlekane/20152-rezystor-justpi-tht-cf-weglowy-14w-47k-30szt-5904422329303.html)
 - some wires
 - some pcb connectors
 - PETG 3d printer filament
