@@ -1,6 +1,7 @@
 # Adding custom files to the path
 
 import sys
+import machine
 
 sys.path.append('/lib')
 sys.path.append('/functions')
@@ -19,3 +20,13 @@ if not wlan.isconnected():
         pass
 print('Connected to WiFi!')
 print('IP v.4 adress:', wlan.ifconfig()[0])
+
+@staticmethod
+def _otaUpdate():
+    print('Checking for Updates...')
+    from ota_updater import OTAUpdater
+    otaUpdater = OTAUpdater('https://github.com/rdehuyss/chicken-shed-mgr', github_src_dir='/', main_dir='firmware')
+    otaUpdater.install_update_if_available()
+    del(otaUpdater)
+
+machine.reset()
