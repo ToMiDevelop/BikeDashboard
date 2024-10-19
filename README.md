@@ -8,6 +8,10 @@
 |-|-|
 ![Device prototype](/pics/main_screen.jpg)|![Device prototype](/pics/l_closed_r_open.jpg)|
 
+|Temperature sensors calibration screen|Fully functional main screen|
+|-|-|
+![Device prototype](/pics/calibration_screen.jpg)|![Device prototype](/pics/main_screen_full.jpg)|
+
 ## 1. Brief repo description
 
 In this repository you'll find the source code, custom PCB project, connection schematics of a simple digital dashboard tailored for the bike of one of my friends.
