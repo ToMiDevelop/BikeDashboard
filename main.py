@@ -10,14 +10,14 @@ import utime
 
 led = Pin(8, Pin.OUT)
 
-i2c_display_sda = 5
-i2c_display_scl = 6
+i2c_display_sda = 4
+i2c_display_scl = 3
 
-switch_1_nc = Pin(1, Pin.IN, Pin.PULL_DOWN)
+switch_lef_nc = Pin(7, Pin.IN, Pin.PULL_DOWN)
+switch_right_nc = Pin(21, Pin.IN, Pin.PULL_DOWN)
 
-switch_2_nc = Pin(4, Pin.IN, Pin.PULL_DOWN)
-
-temp_sensor_pin = Pin(21, Pin.PULL_UP)
+temp_sensor_pin_external = Pin(0, Pin.PULL_UP)
+temp_sensor_pin_engine = Pin(1, Pin.PULL_UP)
 
 # Setting up the parameters of the display
 
@@ -36,22 +36,24 @@ display = I2cLcd(i2c = i2c_display_connection, i2c_addr= i2c_display_adress, num
 # Initializating of the object representing the temperature sensor
 
 from temperature import Temperature
-DSTemp = Temperature(temp_sensor_pin)
+DSTemp_external = Temperature(temp_sensor_pin_external)
+DSTemp_engine = Temperature(temp_sensor_pin_engine)
 
 # Initilization of class responsible to comunicate with the limit switches
 
 from trunk import Trunk
-Trunks = Trunk(switch_1_nc, switch_2_nc)
+Trunks = Trunk(switch_lef_nc, switch_right_nc)
 
 # Initializing the object responsible to show infomration on the display
 
 from display import Display
-Show = Display(DSTemp, Trunks, i2c_display_sda, i2c_display_scl)
+Show = Display(DSTemp_external, DSTemp_engine, Trunks, i2c_display_sda, i2c_display_scl)
 
  # Showing boot screen and main menu frame
 
 Show.EmptyScreen()
 Show.BootScreen()
+Show.CalibrateScreen()
 Show.MainMenu()
 
 # Test of temperature readings, uncomment if desired
@@ -85,4 +87,5 @@ while True:
     if end - start >= interval:
         # Sprawdzenie i wyświetlenie temperatury
         Show.TemperatureOutside()
+        Show.TemperatureEngine()
         start = end
