@@ -1,3 +1,5 @@
+print('firmware version: 0.5')
+
 # Adding custom files to the path
 
 import sys
