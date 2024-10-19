@@ -12,5 +12,8 @@
     "ZAMK." : {"type" : "shortcut", "English" : "closed"},
     "OTWARTY" : {"type" : "full word", "English" : "closed"},
     "st." : {"type" : "shortcut", "English" : "degree"},
-    "C" : {"type" : "shortcut", "English" : "Celsius"}
+    "C" : {"type" : "shortcut", "English" : "Celsius"},
+    "Kalibracja" : {"type" : "full word", "English" : "calibration"},
+    "pomiaru" : {"type" : "full word", "English" : "measurement"},
+    "temperatur" : {"type" : "full word", "English" : "temperatures"}
 }
