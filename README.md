@@ -12,6 +12,10 @@
 |-|-|
 ![Device prototype](/pics/calibration_screen.jpg)|![Device prototype](/pics/main_screen_full.jpg)|
 
+|PCB - soldered bottom|PCB - soldered top|
+|-|-|
+![Device prototype](/pics/pcb_bottom_soldered.jpg)|![Device prototype](/pics/pcb_soldered_top.jpg)|
+
 ## 1. Brief repo description
 
 In this repository you'll find the source code, custom PCB project, connection schematics of a simple digital dashboard tailored for the bike of one of my friends.
@@ -41,10 +45,10 @@ In this repository you'll find the source code, custom PCB project, connection s
 
 ## 4. Brief source code description
 
-The source code of the scripts running on the board are kept in the main path of the repo and in two folders: **lib** and **functions**. Main scripts executed on the board are: **boot.py** and **main.py**. All the folder and files, which need to be transferred to the microcontroller board are visible on the tree bellow.
+The source code of the scripts running on the board is kept in the **firmware** folder residing in main path of the repository. It contains two subfolders: **lib** and **functions**. Main scripts executed on the board are: **boot.py** and **main.py**. All the folder and files, which need to be transferred to the microcontroller board are visible on the tree bellow.
 
 ```
-BikeDashboard
+firmware
 │
 ├──── functions
 │     ├── display.py
