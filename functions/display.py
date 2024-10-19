@@ -7,7 +7,8 @@ from trunk import Trunk
 
 class Display:
     def __init__(self,
-                 _temp_sensors: Temperature,
+                 _temp_sensor_external: Temperature,
+                 _temp_sensor_engine: Temperature,
                  _trunks: Trunk,
                  _i2c_display_sda: int,
                  _i2c_display_scl: int,
@@ -26,7 +27,8 @@ class Display:
         _i2c_display_rows: int number of i2c display rows, default = 4\n
         _i2c_display_columns: int number of i2c display rows, default = 20\n
         """
-        self.temp_sensors = _temp_sensors
+        self.temp_sensor_external = _temp_sensor_external
+        self.temp_sensor_engine = _temp_sensor_engine
         self.trunks = _trunks
         self.i2c_display_sda = _i2c_display_sda
         self.i2c_display_scl = _i2c_display_scl
@@ -61,6 +63,31 @@ class Display:
             self.display.putstr(bar)
             utime.sleep(0.1)
         utime.sleep(1.5)
+    def CalibrateScreen(self):
+        """
+        This function shows the temp sensors calibration screen. Called without arguments.
+        """
+        print("Rozpoczecie kalibracji czujnikow temperatury")
+        self.display.clear()
+        self.display.move_to(5,0)
+        self.display.putstr('Kalibracja')
+        utime.sleep(0.5)
+        self.display.move_to(7,1)
+        self.display.putstr('pomiaru')
+        utime.sleep(0.5)
+        self.display.move_to(5,2)
+        self.display.putstr('temperatur')
+        utime.sleep(0.5)
+        for i in range(19):
+            print("Petla nr",str(i))
+            print('Temperatura zewnetrzna: ' + self.temp_sensor_external.Temp_outside())
+            print('Temperatura silnika: ' + self.temp_sensor_engine.Temp_outside())
+            middle = '-' * i
+            bar = '<' + middle + '>'
+            self.display.move_to(0,3)
+            self.display.putstr(bar)
+            utime.sleep(0.7)
+        utime.sleep(1.5)
     def MainMenu(self):
         """
         This functions is used to display the main menu frame. Called without arguments.
@@ -71,7 +98,7 @@ class Display:
         self.display.move_to(14,0)
         self.display.putstr('st. C')
         self.display.move_to(1,1)
-        self.display.putstr('Siln.: --.--') # wyswuetlanie temperatury na 8,0 zaokrąglenie do 2 cyf # wyswietlanie koncówki 'st. C' na pozycji 14,0
+        self.display.putstr('Siln.:') # wyswuetlanie temperatury na 8,0 zaokrąglenie do 2 cyf # wyswietlanie koncówki 'st. C' na pozycji 14,0
         self.display.move_to(14,1)
         self.display.putstr('st. C')
         # -Kufer L----Kufer P-
@@ -84,8 +111,11 @@ class Display:
         utime.sleep(1)
         # Sprawdzenie i pierwsze wyświetlenie temperatury
         self.display.move_to(8,0)
-        self.display.putstr(self.temp_sensors.Temp_outside())
-        print('Temperatura: ' + self.temp_sensors.Temp_outside())
+        self.display.putstr(self.temp_sensor_external.Temp_outside())
+        self.display.move_to(8,1)
+        self.display.putstr(self.temp_sensor_engine.Temp_outside())
+        print('Temperatura zewnetrzna: ' + self.temp_sensor_external.Temp_outside())
+        print('Temperatura silnika: ' + self.temp_sensor_engine.Temp_outside())
         print('Lewy kufer:', self.trunks.TrunkState())
         print('Prawy kufer:', self.trunks.TrunkState('right'))
     def TrunksState(self):
@@ -107,14 +137,35 @@ class Display:
         """
         if _test == False:
             self.display.move_to(8,0)
-            self.display.putstr(self.temp_sensors.Temp_outside())
-            print('Temperatura: ' + self.temp_sensors.Temp_outside())
+            self.display.putstr(self.temp_sensor_external.Temp_outside())
+            print('Temperatura zewnetrzna: ' + self.temp_sensor_external.Temp_outside())
             print('Lewy kufer:', self.trunks.TrunkState())
             print('Prawy kufer:', self.trunks.TrunkState('right'))
         else:
             self.display.move_to(8,0)
-            self.display.putstr(self.temp_sensors.Temp_outside(True, _testing_temp))
-            print('Temperatura: ' + self.temp_sensors.Temp_outside())
+            self.display.putstr(self.temp_sensor_external.Temp_outside(True, _testing_temp))
+            print('Temperatura: ' + self.temp_sensor_external.Temp_outside())
+            print('Lewy kufer:', self.trunks.TrunkState())
+            print('Prawy kufer:', self.trunks.TrunkState('right'))
+    def TemperatureEngine(self, _test: bool = False, _testing_temp: float = 0.00):
+        """
+        This function is used to get and show the engine temperature. Called without arguments.\n
+        Calling this function with _test = True provides a test to display different temepratures, positive, negative,
+        and also from [-9.99 , 9.99] interval. If you want to perform a test please provide also the temperature value
+        to be displayed as float in _testing_temp argument.\n
+        _test: bool with default False value\n
+        _testing_temp: float with default 0.00 value
+        """
+        if _test == False:
+            self.display.move_to(8,1)
+            self.display.putstr(self.temp_sensor_engine.Temp_outside())
+            print('Temperatura slnika: ' + self.temp_sensor_engine.Temp_outside())
+            print('Lewy kufer:', self.trunks.TrunkState())
+            print('Prawy kufer:', self.trunks.TrunkState('right'))
+        else:
+            self.display.move_to(8,1)
+            self.display.putstr(self.temp_sensor_engine.Temp_outside(True, _testing_temp))
+            print('Temperatura: ' + self.temp_sensor_engine.Temp_outside())
             print('Lewy kufer:', self.trunks.TrunkState())
             print('Prawy kufer:', self.trunks.TrunkState('right'))
     def EmptyScreen(self):
