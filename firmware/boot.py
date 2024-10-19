@@ -1,6 +1,9 @@
+print('firmware version: 0.5')
+
 # Adding custom files to the path
 
 import sys
+import machine
 
 sys.path.append('/lib')
 sys.path.append('/functions')
