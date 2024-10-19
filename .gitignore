@@ -4,4 +4,3 @@
 .vscode/
 .releases/
 .micropico
-lib/WIFI_CONFIG.py

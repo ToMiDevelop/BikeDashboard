@@ -1,2 +1,2 @@
-SSID = "IrysowaOfficeO"
-PASSWORD = "auy397fbmioc"
+SSID = "ssid of your network"
+PASSWORD = "pass key to your network"
