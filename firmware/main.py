@@ -64,6 +64,8 @@ Show.BootScreen(version)
 WiFi = Network(Show.display, 10)
 if WiFi.WiFiState == True:
     Show.WifiScreen(SSID, WiFi.IP)
+    import OTAtest
+    OTAtest.Test()
 if WiFi.WiFiState == False:
     Show.NoWifiScreen()
 Show.CalibrateScreen()
