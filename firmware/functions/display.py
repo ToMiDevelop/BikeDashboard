@@ -4,8 +4,9 @@ import utime
 from i2c_lcd import I2cLcd
 from temperature import Temperature
 from trunk import Trunk
+import network
 
-class Display:
+class AppDisplay:
     def __init__(self,
                  _temp_sensor_external: Temperature,
                  _temp_sensor_engine: Temperature,
@@ -42,7 +43,7 @@ class Display:
                               i2c_addr= self.i2c_display_adress,
                               num_lines = self.i2c_display_rows,
                               num_columns = self.i2c_display_columns)
-    def BootScreen(self):
+    def BootScreen(self, _version: str):
         """
         This function shows the boot screen. Called without arguments.
         """
@@ -51,42 +52,79 @@ class Display:
         self.display.putstr('Motocykl Piotrka')
         utime.sleep(0.5)
         self.display.move_to(5,1)
-        self.display.putstr('wersja 0.3')
+        self.display.putstr('wersja ' + str(_version))
         utime.sleep(0.5)
         self.display.move_to(0,2)
         self.display.putstr('uruchamianie systemu')
         utime.sleep(0.5)
-        for i in range(19):
-            middle = '-' * i
-            bar = '<' + middle + '>'
-            self.display.move_to(0,3)
-            self.display.putstr(bar)
-            utime.sleep(0.1)
-        utime.sleep(1.5)
+        #for i in range(19):
+        #    middle = '-' * i
+        #    bar = '<' + middle + '>'
+        #    self.display.move_to(0,3)
+        #    self.display.putstr(bar)
+        #    utime.sleep(0.1)
+        #utime.sleep(1.5)
+    def WifiScreen(self, _ssid: str, _ip: str):
+        """
+        This function shows on WiFi connect success diagnostic screen.\n
+        _ssid: SSID of the wireless network\n
+        _ip: IP adress assigned to the device
+        """
+        self.SSID = _ssid
+        self.IP = _ip
+        self.display.clear()
+        self.display.move_to(0,0)
+        self.display.putstr('Siec WiFi:')
+        self.display.move_to(0,1)
+        self.display.putstr(self.SSID)
+        utime.sleep(0.5)
+        self.display.move_to(0,2)
+        self.display.putstr('Adres IP:')
+        self.display.move_to(0,3)
+        self.display.putstr(self.IP)
+        utime.sleep(2.0)
+    def NoWifiScreen(self):
+        """
+        This function shows no WiFi connection diagnostic screen.\n
+        Called without arguments.
+        """
+        self.display.clear()
+        self.display.move_to(0,0)
+        self.display.putstr('Siec Wifi')
+        utime.sleep(0.2)
+        self.display.move_to(0,1)
+        self.display.putstr('poza')
+        utime.sleep(0.2)
+        self.display.move_to(0,2)
+        self.display.putstr('zasiegiem.')
+        utime.sleep(0.2)
+        self.display.move_to(0,3)
+        self.display.putstr('Praca offline!')
+        utime.sleep(2.0)
     def CalibrateScreen(self):
         """
         This function shows the temp sensors calibration screen. Called without arguments.
         """
         print("Rozpoczecie kalibracji czujnikow temperatury")
         self.display.clear()
-        self.display.move_to(5,0)
+        self.display.move_to(0,0)
         self.display.putstr('Kalibracja')
         utime.sleep(0.5)
-        self.display.move_to(7,1)
-        self.display.putstr('pomiaru')
+        self.display.move_to(0,1)
+        self.display.putstr('pomiaru temperatur.')
         utime.sleep(0.5)
-        self.display.move_to(5,2)
-        self.display.putstr('temperatur')
+        self.display.move_to(0,2)
+        self.display.putstr('Prosze czekac.')
         utime.sleep(0.5)
         for i in range(19):
             print("Petla nr",str(i))
             print('Temperatura zewnetrzna: ' + self.temp_sensor_external.Temp_outside())
             print('Temperatura silnika: ' + self.temp_sensor_engine.Temp_outside())
-            middle = '-' * i
-            bar = '<' + middle + '>'
+            middle = '=' * i
+            bar = '[' + middle + ']'
             self.display.move_to(0,3)
             self.display.putstr(bar)
-            utime.sleep(0.7)
+            utime.sleep(0.1)
         utime.sleep(1.5)
     def MainMenu(self):
         """

@@ -1,9 +1,12 @@
 # Main script file of the Bike's chockpit diplay
 
+# setting app version
+version = '0.5'
+
 # Modules importing
 
-from machine import Pin, SoftI2C
-from i2c_lcd import I2cLcd
+from machine import Pin #, SoftI2C
+#from i2c_lcd import I2cLcd
 import utime
 
 # Setting udeful names for chosen pin numbers and pin obejcts
@@ -27,11 +30,11 @@ i2c_display_columns = 20
 
 # Initilizing the I2C connection to the display
 
-i2c_display_connection = SoftI2C(sda = Pin(i2c_display_sda), scl = Pin(i2c_display_scl), freq = 400000)
+#i2c_display_connection = SoftI2C(sda = Pin(i2c_display_sda), scl = Pin(i2c_display_scl), freq = 400000)
 
 # Initializing the object representing the lcd screen
 
-display = I2cLcd(i2c = i2c_display_connection, i2c_addr= i2c_display_adress, num_lines = i2c_display_rows, num_columns = i2c_display_columns)
+#display = I2cLcd(i2c = i2c_display_connection, i2c_addr= i2c_display_adress, num_lines = i2c_display_rows, num_columns = i2c_display_columns)
 
 # Initializating of the object representing the temperature sensor
 
@@ -44,15 +47,25 @@ DSTemp_engine = Temperature(temp_sensor_pin_engine)
 from trunk import Trunk
 Trunks = Trunk(switch_lef_nc, switch_right_nc)
 
-# Initializing the object responsible to show infomration on the display
+# Initializing the object responsible to show information on the display
 
-from display import Display
-Show = Display(DSTemp_external, DSTemp_engine, Trunks, i2c_display_sda, i2c_display_scl)
+from display import AppDisplay
+Show = AppDisplay(DSTemp_external, DSTemp_engine, Trunks, i2c_display_sda, i2c_display_scl)
 
- # Showing boot screen and main menu frame
 
-Show.EmptyScreen()
-Show.BootScreen()
+# Creating WiFi object representing the WiFi network connection and it's state
+
+from WIFI_CONFIG import SSID
+from connectivity import Network
+
+ # Showing boot and diagnostic screens, connecting to WiFi
+
+Show.BootScreen(version)
+WiFi = Network(Show.display, 10)
+if WiFi.WiFiState == True:
+    Show.WifiScreen(SSID, WiFi.IP)
+if WiFi.WiFiState == False:
+    Show.NoWifiScreen()
 Show.CalibrateScreen()
 Show.MainMenu()
 

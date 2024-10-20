@@ -1,2 +1,2 @@
-SSID = "Your SSID"
-PASSWORD = "Your password"
+SSID = "SSID name"
+PASSWORD = "Wifi password"

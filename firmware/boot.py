@@ -1,24 +1,35 @@
-print('firmware version: 0.5')
+# This file is executed on every boot (including wake-boot from deepsleep)
+#import esp
+#esp.osdebug(None)
+#import webrepl
+#webrepl.start()
 
-# Adding custom files to the path
+
+# Importing standard modules
 
 import sys
-import machine
+
+# Importing WiFi connection data
+
+# from WIFI_CONFIG import SSID, PASSWORD
+
+# Adding extra folders to system path
 
 sys.path.append('/lib')
 sys.path.append('/functions')
 
-# Creating a wifi connection
+print('Rozruch systemu rozpoczęty!')
 
-from WIFI_CONFIG import SSID, PASSWORD
-import network
+# Creating a wifi connection and showing a screen if succeeded
 
-wlan = network.WLAN(network.WLAN.IF_STA) # type: ignore
-wlan.active(True)
-if not wlan.isconnected():
-    print('Connecting to WiFi...')
-    wlan.connect(SSID, PASSWORD)
-    while not wlan.isconnected():
-        pass
-print('Connected to WiFi!')
-print('IP v.4 adress:', wlan.ifconfig()[0])
+# def networking():
+#    wlan = network.WLAN(network.WLAN.IF_STA) # type: ignore
+#    wlan.active(True)
+#    if not wlan.isconnected():
+#        print('Connecting to WiFi...')
+#        wlan.connect(SSID, PASSWORD)
+#        while not wlan.isconnected():
+#            pass
+#    if wlan.isconnected():
+#        print('Connected to WiFi!')
+#        print('IP v.4 adress:', wlan.ifconfig()[0])
