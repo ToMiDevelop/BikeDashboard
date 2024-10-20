@@ -28,11 +28,13 @@ class Network:
                         self.display.move_to(0,3)
                         self.display.putstr('[' + '=' * 18 + ']')
                         utime.sleep(0.5)
+                        wlan.active(False)
                         return False
                 if wlan.ifconfig()[0] == '0.0.0.0':
                     self.display.move_to(0,3)
                     self.display.putstr('[' + '=' * 18 + ']')
                     utime.sleep(0.5)
+                    wlan.active(False)
                     return False
                 else:
                     self.display.move_to(0,3)
@@ -44,6 +46,7 @@ class Network:
                 self.display.move_to(0,3)
                 self.display.putstr('[' + '=' * 18 + ']')
                 utime.sleep(0.5)
+                wlan.active(False)
                 return False
     def __init__(self, _display: I2cLcd, _timeout: int = 15):
         """
